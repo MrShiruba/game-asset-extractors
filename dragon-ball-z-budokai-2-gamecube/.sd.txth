@@ -1,0 +1,24 @@
+# Dragon Ball Z Budokai 2 (GameCube) - .sd/.st sound banks
+# NOTE: TXTH math expressions strictly evaluate from left to right (no parentheses support)
+# Place this file (.sd.txth) in the same directory as the .sd/.st files, then open the .sd file
+codec = NGC_DSP
+channels = 1
+header_file = *.st
+
+# Number of substreams = first word of the .st file
+subsong_count = @0x00:BE
+
+# DSP coefficients: 0x5C block per substream, after the table (4 + count*0x1C)
+base_offset = @0x00:BE * 0x1C + 0x04
+subsong_spacing = 0x5C
+coef_offset = 0x00
+coef_endianness = BE
+base_offset = 0
+
+# Table: 0x1C per substream (sample rate, end nibble address, start nibble address)
+subsong_spacing = 0x1C
+sample_rate = @0x08:BE
+start_offset = @0x18:BE - 2 / 2
+# Exact length = total nibbles - 2 header nibbles per 16-byte frame (2-step calculation)
+num_samples = @0x14:BE - @0x18:BE + 18 / 16 * 2
+num_samples = @0x14:BE - @0x18:BE + 3 - num_samples
