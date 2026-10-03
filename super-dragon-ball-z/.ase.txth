@@ -1,0 +1,15 @@
+# Super Dragon Ball Z (PS2) - Arika sound banks (.ase)
+# Header: u32 version(100), u32 sound count, u32 data size,
+#         then N x { u32 SPU2 pitch, u32 offset } ; mono PS-ADPCM data at EOF
+codec = PSX
+channels = 1
+subsong_count = @0x04
+
+# Data start = file size - data size
+# (stored in coef_offset, unused for PSX ; must remain before subsong_spacing)
+coef_offset = data_size - @0x08
+
+subsong_spacing = 0x08
+sample_rate = @0x0C * 48000 / 4096
+start_offset = @0x10 + coef_offset
+num_samples = data_size
