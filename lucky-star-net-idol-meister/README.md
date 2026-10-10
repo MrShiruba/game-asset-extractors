@@ -80,12 +80,12 @@ every name below was added by this tool (see [Names](#names)).
 | IDs | Folder | Content |
 |---|---|---|
 | 00000–00018 | `prologue/<unit>/` | first scene of each of the 19 units |
-| 00019–00460 | `PV配信/chrNN_<name>/` | PV配信 scenes, per character |
-| 00461–00522 | `PV配信/unitNN_<name>/` | PV配信 scenes, per unit |
+| 00019–00460 | `pv-haishin/chrNN_<name>/` | PV配信 scenes, per character |
+| 00461–00522 | `pv-haishin/unitNN_<name>/` | PV配信 scenes, per unit |
 | 00523–00579 | `endings/<unit>/` | 3 endings per unit |
 | 00580–00592 | `story/` | story told by 鳥工作; 00580 opens a new game |
-| 00593–00594 | `ミニゲーム/` | texts shown after the ファン暴走 mini-game |
-| 00595 | `ローカルオーディション/` | quiz database: 1800 questions, 9 categories of 200 |
+| 00593–00594 | `minigame/` | texts shown after the ファン暴走 mini-game |
+| 00595 | `local-audition/` | quiz database: 1800 questions, 9 categories of 200 |
 
 `<unit>` is `chrNN_<name>` for a single character or `unitNN_<name>` for a group.
 
@@ -95,8 +95,8 @@ One AHX per voiced line, in script order. Files are named after the line they be
 and sorted like the scripts, one folder per script:
 
 ```
-ahx_encrypted/prologue/chr00_こなた/sc00000/sc00000_msg0001_chr00_こなた.ahx
-                                            │       │       │     └ speaker name shown in the text box
+ahx_encrypted/prologue/chr00_konata/sc00000/sc00000_msg0001_chr00_konata.ahx
+                                            │       │       │     └ name of the character, when it is a known one
                                             │       │       └ character number stored in the script
                                             │       └ message number stored in the script
                                             └ script 00000 of sc.cpk
@@ -107,19 +107,19 @@ ahx_encrypted/prologue/chr00_こなた/sc00000/sc00000_msg0001_chr00_こなた.a
 | IDs | Folder | Content |
 |---|---|---|
 | 00000–00044 | `adx/bgm/` | music |
-| 00045–00067 | `adx/ボイストレーニング/` | singing voices of that mini-game, one per character |
+| 00045–00067 | `adx/voice-training/` | singing voices of that mini-game, one per character |
 | 00068–00242 | `adx/se/` | sound effects, with the number the scripts use |
 | 00243–00250 | `adx/ambient/` | looping ambience |
-| 00251–00450 | `ahx_encrypted/ローカルオーディション/` | one voice per question of the モノマネ大会 quiz category |
+| 00251–00450 | `ahx_encrypted/local-audition/` | one voice per question of the モノマネ大会 quiz category |
 | 00451–00910 | `ahx_encrypted/system-voices/<situation>/` | 20 situations x 23 characters |
 | 00911 | `ahx_encrypted/story/` | narration of the game intro |
-| 00912–01236 | `png/アルバム鑑賞/` | event CGs, named `<album rank>-<id>.png` |
+| 00912–01236 | `png/album-kanshou/` | event CGs, named `<album rank>-<id>.png` |
 | 01237–01463 | `png/bg/` | backgrounds |
 | 01464–02925 | `png/tachie/<character>/` | character sprites |
 | 02926–02962 | `png/<screen>/` | interface screens |
-| 02963–03238 | `png/ミニゲーム/<mini-game>/`, `acx/ミニゲーム-sfx/`, `ahx/ミニゲーム-voices/<mini-game>/chrNN_<name>/` | mini-games: images, sound effects, per-character voices |
+| 02963–03238 | `png/minigame/<mini-game>/`, `acx/minigame-sfx/`, `ahx/minigame-voices/<mini-game>/chrNN_<name>/` | mini-games: images, sound effects, per-character voices |
 | 03239–03247 | `png/<screen>/` | interface screens |
-| 03248–03255 | `png/ミニゲーム/<mini-game>/` | 8 GIM previews of the mini-game menu |
+| 03248–03255 | `png/minigame/<mini-game>/` | 8 GIM previews of the mini-game menu |
 
 ### lt.bin and pr.bin
 
@@ -156,15 +156,40 @@ The details are in the comments of each module.
 
 ## Names
 
-The game stores no file name, so every folder and file name is ours. To keep track of
-where a word comes from:
+The game stores no file name, so every folder and file name is ours. Output names use
+ASCII only, to stay easy to type and to script:
 
-- **Japanese** = shown by the game itself, written as the game writes it: character names,
-  unit names (`みさお & あやの`, `U-18`, `Adult Only`…), mini-game names, `PV配信`, `ミニゲーム`, `ローカルオーディション`, `アルバム鑑賞`, `セーブ`…
-- **English** = a category we made up: `prologue`, `endings`, `story`, `bgm`, `se`,
-  `system-voices`, `tachie`… A name can mix both: `PV配信-start`, `ミニゲーム-voices`.
-- **Numbers** in file names are the original IDs, or numbers stored in the scripts
-  (`msg`, `chr`). `unitNN` and the `Q` of quiz questions are ours.
+- names shown by the game are written in **romaji** (Hepburn, long vowels spelled out:
+  `kou`, `soujirou`), and loanwords in **English** (`voice-training`, `minigame`);
+- the categories we made up are in English: `prologue`, `endings`, `story`, `bgm`, `se`,
+  `system-voices`, `tachie`…
+- numbers in file names are the original IDs, or numbers stored in the scripts (`msg`,
+  `chr`). `unitNN` and the `Q` of quiz questions are ours.
+
+| In the output | In the game |
+|---|---|
+| `konata`, `kagami`, `tsukasa`, `miyuki` | こなた, かがみ, つかさ, みゆき |
+| `misao`, `ayano`, `kou`, `yamato` | みさお, あやの, こう, やまと |
+| `yutaka`, `minami`, `hiyori`, `patty` | ゆたか, みなみ, ひより, パティ |
+| `akira`, `hikage`, `hinata`, `yui` | あきら, ひかげ, ひなた, ゆい |
+| `nanako`, `hikaru`, `fuyuki`, `soujirou` | ななこ, ひかる, ふゆき, そうじろう |
+| `yukari`, `minami-no-haha`, `cherry` | ゆかり, みなみの母, チェリー |
+| `kanata`, `anizawa`, `takahashi`, `tori-kousaku`, `miku` | かなた, 兄沢, 高橋社長, 鳥工作, ミク |
+| `misao-ayano` and the other duos | みさお & あやの… |
+| `main-chara-4nin`, `u-18`, `adult-only` | メインキャラは4人, U-18, Adult Only |
+| `pv-haishin` | PV配信 |
+| `minigame` | ミニゲーム |
+| `local-audition`, `net-idol-audition` | ローカルオーディション, ネットアイドルオーディション |
+| `akushukai`, `blog-enjou`, `omikoshi-wasshoi` | 握手会, ブログ炎上, お神輿わっしょい |
+| `fan-bousou`, `mega-konatan` | ファン暴走, メガコナタン |
+| `voice-training`, `gravure-satsuei`, `dance-lesson` | ボイストレーニング, グラビア撮影, ダンスレッスン |
+| `album-kanshou` | アルバム鑑賞 |
+| `idol-sentaku`, `idol-dendou` | iDOL☆選択, アイドル殿堂 |
+| `lucky-pon`, `wagon-sale`, `izumi-ke`, `costume` | らっきーぽん, ワゴンセール, 泉家, コスチューム |
+| `save`, `load`, `install` | セーブ, ロード, インストール |
+
+Voice files of minor speakers only get their character number (`chr27`); the speaker name
+shown by the game is in `voices.csv`.
 
 The sorting was checked by playing the game: the unit names and their members, which
 unit each prologue, ending and PV配信 scene belongs to, the quiz voices, the intro

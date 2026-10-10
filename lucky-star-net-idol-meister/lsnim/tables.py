@@ -1,8 +1,9 @@
 """Data: sorting tables, names, and tables copied from the EBOOT (ULJM05542).
 
 Nothing here decodes a format; these tables say what each file is and where it goes.
-Naming rule: what the game displays is kept in Japanese as displayed; the categories
-we made up are in English.
+Output names are ASCII only: Japanese names shown by the game are written in romaji
+(Hepburn, long vowels spelled out: kou, soujirou), loanwords in English (voice-training,
+minigame); the Japanese original is given in the comments and in the README.
 """
 import os
 import struct
@@ -14,6 +15,10 @@ import struct
 CHARACTERS = ['こなた', 'かがみ', 'つかさ', 'みゆき', 'みさお', 'あやの', 'こう', 'やまと',
               'ゆたか', 'みなみ', 'ひより', 'パティ', 'あきら', 'ひかげ', 'ひなた', 'ゆい',
               'ななこ', 'ひかる', 'ふゆき', 'そうじろう', 'ゆかり', 'みなみの母', 'チェリー']
+# The same characters in romaji, used in folder and file names (output names are ASCII).
+CHARACTER_IDS = ['konata', 'kagami', 'tsukasa', 'miyuki', 'misao', 'ayano', 'kou', 'yamato',
+                 'yutaka', 'minami', 'hiyori', 'patty', 'akira', 'hikage', 'hinata', 'yui',
+                 'nanako', 'hikaru', 'fuyuki', 'soujirou', 'yukari', 'minami-no-haha', 'cherry']
 
 
 # ---------------------------------------------------------------- quiz
@@ -207,69 +212,78 @@ BLOCK_ORDER = """
 # numbering matches the file counts exactly and was checked by ear.
 # Two groups are never called by the scripts (the mini-game / map code plays them); their
 # folder names are ours:
-#     45-67    ボイストレーニング  singing voices of that mini-game, one per character in
-#                             character order: 045-chr00_こなた.adx ... 067-chr22_チェリー.adx
+#     45-67    voice-training  singing voices of the ボイストレーニング mini-game, one per character
+#                             in character order: 045-chr00_konata.adx ... 067-chr22_cherry.adx
 #     243-250  ambient        looping ambience (car, waves, alarm...)
 # Each group gets its own folder under adx/ and files keep their union index; sound
 # effects also get the number the scripts use: adx/bgm/000.adx, adx/se/068-se000.adx.
 SOUND_FILES = {}
 SOUND_FILES.update({n: ('bgm', None) for n in range(45)})
-SOUND_FILES.update({45 + n: ('ボイストレーニング', 'chr%02d_%s' % (n, CHARACTERS[n])) for n in range(23)})
+SOUND_FILES.update({45 + n: ('voice-training', 'chr%02d_%s' % (n, CHARACTER_IDS[n])) for n in range(23)})
 SOUND_FILES.update({68 + n: ('se', 'se%03d' % n) for n in range(175)})
 SOUND_FILES.update({243 + n: ('ambient', None) for n in range(8)})
 
 # union ACX holding ADX: the sound effects of each mini-game, written to
-# acx/ミニゲーム-sfx/<id>-<mini-game>.acx. Names as written in the game's ミニ☆ゲーム menu.
+# acx/minigame-sfx/<id>-<mini-game>.acx. The Japanese names are those of the game's ミニ☆ゲーム menu.
+# Romaji / English used in the output names -> name shown by the game:
+#   akushukai 握手会, blog-enjou ブログ炎上, omikoshi-wasshoi お神輿わっしょい, fan-bousou ファン暴走,
+#   mega-konatan メガコナタン, voice-training ボイストレーニング, gravure-satsuei グラビア撮影,
+#   dance-lesson ダンスレッスン, local-audition ローカルオーディション, minigame ミニゲーム,
+#   pv-haishin PV配信, album-kanshou アルバム鑑賞, idol-sentaku iDOL☆選択, idol-dendou アイドル殿堂,
+#   lucky-pon らっきーぽん, wagon-sale ワゴンセール, izumi-ke 泉家, costume コスチューム,
+#   save セーブ, load ロード, install インストール, net-idol-audition ネットアイドルオーディション
+#   units: adult-only "Adult Only", u-18 "U-18", main-chara-4nin メインキャラは4人,
+#          misao-ayano "みさお & あやの" (the same for the other duos)
 MINIGAME_SFX = {
-    2964: '握手会',
-    2989: 'ブログ炎上',
-    3014: 'お神輿わっしょい',
-    3039: 'ファン暴走',
-    3064: 'メガコナタン',
-    3066: 'ボイストレーニング_グラビア撮影_ダンスレッスン',   # shared by these 3 mini-games
-    3215: 'ローカルオーディション',
+    2964: 'akushukai',
+    2989: 'blog-enjou',
+    3014: 'omikoshi-wasshoi',
+    3039: 'fan-bousou',
+    3064: 'mega-konatan',
+    3066: 'voice-training_gravure-satsuei_dance-lesson',   # shared by these 3 mini-games
+    3215: 'local-audition',
 }
 
 # union ACX holding AHX: mini-game voices, one ACX per character, 23 in a row in the order
 # of the character select screen = the character numbers of the scripts (00 こなた ...
-# 22 チェリー). Written to ahx/ミニゲーム-voices/<mini-game>/chrNN_<name>/<id>_<track>.ahx;
+# 22 チェリー). Written to ahx/minigame-voices/<mini-game>/chrNN_<name>/<id>_<track>.ahx;
 # the first tracks of each ACX are lines shared by all characters (identical copies).
 MINIGAME_VOICES = {
-    2965: '握手会',
-    2990: 'ブログ炎上',
-    3015: 'お神輿わっしょい',
-    3040: 'ファン暴走',
-    3090: 'ダンスレッスン',
-    3216: 'ローカルオーディション',
+    2965: 'akushukai',
+    2990: 'blog-enjou',
+    3015: 'omikoshi-wasshoi',
+    3040: 'fan-bousou',
+    3090: 'dance-lesson',
+    3216: 'local-audition',
 }
 
 
 # union images, sorted by what they show (ranges checked in game); anything not listed
 # stays directly in png/. Mini-game names as in the ミニ☆ゲーム menu.
 IMAGE_FOLDERS = {'union': [
-    (912, 1236, 'アルバム鑑賞'),         # event CGs (the album of the game)
+    (912, 1236, 'album-kanshou'),         # event CGs (the album of the game)
     (1237, 1463, 'bg'),                 # backgrounds
     (1464, 2925, 'tachie'),             # character sprites
     (2926, 2962, 'ui'),                 # title screen, menus, settings, interface, save icon
-    (2963, 2963, 'ミニゲーム/握手会'),
-    (2988, 2988, 'ミニゲーム/ブログ炎上'),
-    (3013, 3013, 'ミニゲーム/お神輿わっしょい'),
-    (3038, 3038, 'ミニゲーム/ファン暴走'),
-    (3063, 3063, 'ミニゲーム/メガコナタン'),
-    (3065, 3065, 'ミニゲーム/ボイストレーニング_グラビア撮影_ダンスレッスン'),
-    (3067, 3089, 'ミニゲーム/ボイストレーニング'),
-    (3113, 3213, 'ミニゲーム/ローカルオーディション'),   # quiz screen, then close-ups and silhouettes of the questions
+    (2963, 2963, 'minigame/akushukai'),
+    (2988, 2988, 'minigame/blog-enjou'),
+    (3013, 3013, 'minigame/omikoshi-wasshoi'),
+    (3038, 3038, 'minigame/fan-bousou'),
+    (3063, 3063, 'minigame/mega-konatan'),
+    (3065, 3065, 'minigame/voice-training_gravure-satsuei_dance-lesson'),
+    (3067, 3089, 'minigame/voice-training'),
+    (3113, 3213, 'minigame/local-audition'),   # quiz screen, then close-ups and silhouettes of the questions
     (3214, 3214, 'ui'),                 # 16x16 font
     (3239, 3247, 'ui'),
     # GIM previews of the ミニ☆ゲーム menu, in menu order
-    (3248, 3248, 'ミニゲーム/ボイストレーニング'),
-    (3249, 3249, 'ミニゲーム/グラビア撮影'),
-    (3250, 3250, 'ミニゲーム/ダンスレッスン'),
-    (3251, 3251, 'ミニゲーム/お神輿わっしょい'),
-    (3252, 3252, 'ミニゲーム/ブログ炎上'),
-    (3253, 3253, 'ミニゲーム/握手会'),
-    (3254, 3254, 'ミニゲーム/メガコナタン'),
-    (3255, 3255, 'ミニゲーム/ファン暴走'),
+    (3248, 3248, 'minigame/voice-training'),
+    (3249, 3249, 'minigame/gravure-satsuei'),
+    (3250, 3250, 'minigame/dance-lesson'),
+    (3251, 3251, 'minigame/omikoshi-wasshoi'),
+    (3252, 3252, 'minigame/blog-enjou'),
+    (3253, 3253, 'minigame/akushukai'),
+    (3254, 3254, 'minigame/mega-konatan'),
+    (3255, 3255, 'minigame/fan-bousou'),
 ]}
 
 
@@ -304,14 +318,19 @@ TACHIE_CHARACTERS = [
     (2916, 2916, 17), (2917, 2918, 18), (2919, 2920, 19), (2921, 2922, 20), (2923, 2923, 21),
     (2924, 2924, 9), (2925, 2925, 23),
 ]
-CHARACTER_NAMES = dict(enumerate(CHARACTERS))
-CHARACTER_NAMES[23] = 'かなた'           # character 23 of the scripts (こなた's mother)
-CHARACTER_NAMES[25] = '兄沢'             # character 25 of the scripts
+CHARACTER_NAMES = dict(enumerate(CHARACTER_IDS))
+CHARACTER_NAMES[23] = 'kanata'           # character 23 of the scripts: かなた (こなた's mother)
+CHARACTER_NAMES[25] = 'anizawa'          # character 25 of the scripts: 兄沢
+CHARACTER_NAMES[26] = 'tori-kousaku'     # 鳥工作
+CHARACTER_NAMES[29] = 'miku'             # ミク
+CHARACTER_NAMES[30] = 'takahashi'        # 高橋社長
+CHARACTER_NAMES[31] = 'narration'        # ナレーション
+# 24, 27 and 28 are shared by many minor speakers (司会, パイロット, オペレーター...): no name.
 
 
 # Order of the event CGs in the アルバム☆鑑賞 album: entry k (k = 0..324) shows union file
 # 912 + ALBUM_ORDER[k] (u16 table at file offset 0x14ddb0 of ULJM05542 EBOOT.BIN).
-# CGs are named <album rank 001-325>-<union id>, e.g. png/アルバム鑑賞/003-01150.png.
+# CGs are named <album rank 001-325>-<union id>, e.g. png/album-kanshou/003-01150.png.
 ALBUM_ORDER = struct.unpack('<325H', bytes.fromhex(
     '00000100ee00020003000400050006000700080009000a000b000c000d000e000f001000110012001300150014001600'
     '1700180019001a001b001c001d001f001e0020002100220023002400250026002700280029002a002b002c002d002e00'
@@ -336,26 +355,26 @@ ALBUM_RANK = {912 + n: k + 1 for k, n in enumerate(ALBUM_ORDER)}
 UI_SCREENS = [
     (2926, 2926, 'title-screen'),
     (2928, 2928, 'options'),
-    (2929, 2929, 'セーブ'),
-    (2930, 2930, 'ロード'),
-    (2931, 2931, '泉家'),
-    (2932, 2932, 'アルバム鑑賞-thumbnails'),
-    (2933, 2933, 'セーブ-icon'),
-    (2934, 2934, 'インストール'),
-    (2936, 2936, 'らっきーぽん'),
-    (2937, 2937, 'PV配信-situation-select'),
-    (2938, 2938, 'アイドル殿堂'),
-    (2939, 2939, 'ワゴンセール'),
+    (2929, 2929, 'save'),
+    (2930, 2930, 'load'),
+    (2931, 2931, 'izumi-ke'),
+    (2932, 2932, 'album-kanshou-thumbnails'),
+    (2933, 2933, 'save-icon'),
+    (2934, 2934, 'install'),
+    (2936, 2936, 'lucky-pon'),
+    (2937, 2937, 'pv-haishin-situation-select'),
+    (2938, 2938, 'idol-dendou'),
+    (2939, 2939, 'wagon-sale'),
     (2940, 2959, 'characters-fade'),
     (2960, 2962, 'extend-event'),
     (3214, 3214, 'font'),
-    (3239, 3239, 'PV配信-start'),
-    (3240, 3241, 'iDOL☆選択'),                 # 03240 interface, 03241 portraits
+    (3239, 3239, 'pv-haishin-start'),
+    (3240, 3241, 'idol-sentaku'),                 # 03240 interface, 03241 portraits
     (3242, 3242, 'idol-results-status'),
-    (3243, 3243, 'コスチューム'),
-    (3244, 3244, 'ミニゲーム-menu'),
-    (3245, 3245, 'ローカルオーディション-results'),
-    (3246, 3246, 'ネットアイドルオーディション-results'),
+    (3243, 3243, 'costume'),
+    (3244, 3244, 'minigame-menu'),
+    (3245, 3245, 'local-audition-results'),
+    (3246, 3246, 'net-idol-audition-results'),
     (3247, 3247, 'intro'),
 ]
 
@@ -377,14 +396,14 @@ def png_folder(archive_label, stem):
 
 
 # union 00251-00450: voices of the quiz category モノマネ大会 (see QUIZ_VOICES_FIRST), one
-# per question, written to ahx/ローカルオーディション/<id>-Q<nnnn>.ahx. The game only stores the
-# question index; Q<nnnn> is our label, the same as in sc/txt/ローカルオーディション/00595.txt (Q1001-Q1200).
+# per question, written to ahx/local-audition/<id>-Q<nnnn>.ahx. The game only stores the
+# question index; Q<nnnn> is our label, the same as in sc/txt/local-audition/00595.txt (Q1001-Q1200).
 def quiz_voice_path(file_id):
     """(folder, stem) for a union quiz voice, or None."""
     question = quiz_voice_question(file_id)
     if question is None:
         return None
-    return os.path.join('ahx', 'ローカルオーディション'), '%05d-Q%04d' % (file_id, question + 1)
+    return os.path.join('ahx', 'local-audition'), '%05d-Q%04d' % (file_id, question + 1)
 
 
 # union 00911: one-minute narration of the game intro, played right after script 00580 when
@@ -402,9 +421,9 @@ MENU_VOICES_FIRST = 451
 MENU_VOICE_SITUATIONS = [
     'title-call', 'day-start-1', 'day-start-2', 'day-start-3', 'day-start-4',
     'day-end-1', 'day-end-2', 'day-end-3', 'day-end-4', 'day-end-5',
-    'extend-event', 'コスチューム', 'location-welcome',
-    'ローカルオーディション-1st-place', 'ローカルオーディション-lose', 'level-up', 'rank-up',
-    'PV配信-ready', 'PV配信-action', 'PV配信-cut',
+    'extend-event', 'costume', 'location-welcome',
+    'local-audition-1st-place', 'local-audition-lose', 'level-up', 'rank-up',
+    'pv-haishin-ready', 'pv-haishin-action', 'pv-haishin-cut',
 ]
 
 
@@ -415,14 +434,14 @@ def menu_voice_path(file_id):
         return None
     situation, character = divmod(k, len(CHARACTERS))
     folder = os.path.join('ahx', 'system-voices', MENU_VOICE_SITUATIONS[situation])
-    return folder, '%05d-chr%02d_%s' % (file_id, character, CHARACTERS[character])
+    return folder, '%05d-chr%02d_%s' % (file_id, character, CHARACTER_IDS[character])
 
 
 def minigame_voice_folder(file_id):
     for first, game in MINIGAME_VOICES.items():
         if first <= file_id < first + len(CHARACTERS):
             n = file_id - first
-            return os.path.join('ahx', 'ミニゲーム-voices', game, 'chr%02d_%s' % (n, CHARACTERS[n]))
+            return os.path.join('ahx', 'minigame-voices', game, 'chr%02d_%s' % (n, CHARACTER_IDS[n]))
     return None
 
 
@@ -433,37 +452,37 @@ def minigame_voice_folder(file_id):
 # The 19 units of the iDOL☆選択 screen (7 SOLO, 6 DUO, 6 SPECIAL) are numbered here by
 # their prologue script, 00000-00018; unit k has the endings 00523 + 3k to 00525 + 3k.
 #   prologue/<unit>/        00000-00018  first scene of each unit
-#   PV配信/chrNN_<name>/      00019-00460  PV配信 scenes of one character, in character order
-#   PV配信/unitNN_<name>/     00461-00522  PV配信 scenes of a DUO / SPECIAL unit; NN (ours)
+#   pv-haishin/chrNN_<name>/   00019-00460  PV配信 scenes of one character, in character order
+#   pv-haishin/unitNN_<name>/  00461-00522  PV配信 scenes of a DUO / SPECIAL unit; NN (ours)
 #                                           = 01-11 in file order
 #   endings/<unit>/         00523-00579  3 endings per unit
-# <unit> = chrNN_<name> (SOLO) or unitNN_<name>, the same folder names as in PV配信/.
+# <unit> = chrNN_<name> (SOLO) or unitNN_<name>, the same folder names as in pv-haishin/.
 #   story/                  00580-00592  story told by 鳥工作 (00580 = intro of a new game)
-#   ミニゲーム/             00593-00594  texts shown after the ファン暴走 mini-game
-#   ローカルオーディション/  00595        quiz database
+#   minigame/               00593-00594  texts shown after the ファン暴走 mini-game
+#   local-audition/         00595        quiz database (ローカルオーディション)
 # Unit names are the ones drawn by the game on the iDOL☆選択 screen (union 03240), checked
 # in game: "U-18" is the 15 young characters (prologue 00018), "Adult Only" is そうじろう,
 # ゆかり and みなみの母 (prologue 00008).
 CHARACTER_EVENTS_FIRST = (19, 44, 69, 94, 119, 139, 159, 179, 199, 224, 249, 270, 290, 315, 335,
                           355, 370, 386, 401, 416, 426, 436, 446, 461)   # one start per character
-UNIT_EVENTS = [(461, 465, 'Adult Only'), (466, 470, 'みさお & あやの'), (471, 475, 'こう & やまと'),
-               (476, 480, 'ひより & パティ'), (481, 485, 'ひなた & ひかげ'), (486, 490, 'ゆい & ななこ'),
-               (491, 495, 'ひかる & ふゆき'), (496, 507, 'メインキャラは4人'), (508, 512, 'ゆたか & みなみ'),
-               (513, 517, 'ひかる & あきら'), (518, 522, 'U-18')]
+UNIT_EVENTS = [(461, 465, 'adult-only'), (466, 470, 'misao-ayano'), (471, 475, 'kou-yamato'),
+               (476, 480, 'hiyori-patty'), (481, 485, 'hinata-hikage'), (486, 490, 'yui-nanako'),
+               (491, 495, 'hikaru-fuyuki'), (496, 507, 'main-chara-4nin'), (508, 512, 'yutaka-minami'),
+               (513, 517, 'hikaru-akira'), (518, 522, 'u-18')]
 
 
 # Unit of each prologue 00000-00018 (and of its endings): a character number for the SOLO
 # units, a unit name for the others. Found from who speaks in the prologue and its endings,
 # then checked in game.
-PROLOGUE_UNITS = [0, 1, 2, 3, 8, 9, 12, 22, 'Adult Only', 'みさお & あやの', 'こう & やまと',
-                  'ひより & パティ', 'ひなた & ひかげ', 'ゆい & ななこ', 'ひかる & ふゆき', 'メインキャラは4人',
-                  'ゆたか & みなみ', 'ひかる & あきら', 'U-18']
+PROLOGUE_UNITS = [0, 1, 2, 3, 8, 9, 12, 22, 'adult-only', 'misao-ayano', 'kou-yamato',
+                  'hiyori-patty', 'hinata-hikage', 'yui-nanako', 'hikaru-fuyuki', 'main-chara-4nin',
+                  'yutaka-minami', 'hikaru-akira', 'u-18']
 
 
 def unit_folder(unit):
     """chrNN_<name> for a character number, unitNN_<name> for a unit name."""
     if isinstance(unit, int):
-        return 'chr%02d_%s' % (unit, CHARACTERS[unit])
+        return 'chr%02d_%s' % (unit, CHARACTER_IDS[unit])
     number = [name for _, _, name in UNIT_EVENTS].index(unit) + 1
     return 'unit%02d_%s' % (number, unit)
 
@@ -474,14 +493,14 @@ def script_folder(script_id):
         return os.path.join('prologue', unit_folder(PROLOGUE_UNITS[script_id]))
     if script_id < CHARACTER_EVENTS_FIRST[-1]:
         character = max(k for k, first in enumerate(CHARACTER_EVENTS_FIRST) if first <= script_id)
-        return os.path.join('PV配信', 'chr%02d_%s' % (character, CHARACTERS[character]))
+        return os.path.join('pv-haishin', 'chr%02d_%s' % (character, CHARACTER_IDS[character]))
     for first, last, unit in UNIT_EVENTS:
         if first <= script_id <= last:
-            return os.path.join('PV配信', unit_folder(unit))
+            return os.path.join('pv-haishin', unit_folder(unit))
     if script_id <= 579:
         return os.path.join('endings', unit_folder(PROLOGUE_UNITS[(script_id - 523) // 3]))
     if script_id <= 592:
         return 'story'
     if script_id <= 594:
-        return 'ミニゲーム'
-    return 'ローカルオーディション' if script_id == 595 else ''
+        return 'minigame'
+    return 'local-audition' if script_id == 595 else ''

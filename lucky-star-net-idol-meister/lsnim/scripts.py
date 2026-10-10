@@ -2,7 +2,7 @@
 import os
 import struct
 
-from .tables import BLOCK_ORDER, QUIZ_CATEGORY_SIZE, QUIZ_VOICES_FIRST, QUIZ_VOICE_CATEGORY
+from .tables import CHARACTER_NAMES, BLOCK_ORDER, QUIZ_CATEGORY_SIZE, QUIZ_VOICES_FIRST, QUIZ_VOICE_CATEGORY
 from .cpk import decompress_crilayla, list_entries
 
 
@@ -224,7 +224,6 @@ def convert(data):
 
 
 VOICE_CMD = 0xFF65      # FF65 <msg_id> <character_id> [FFF0 <msg_id> speaker FFFF text...]
-FILENAME_FORBIDDEN = '<>:"/\\|?*'
 
 
 def voiced_lines(data, glyphs):
@@ -262,31 +261,22 @@ def voiced_lines(data, glyphs):
     return lines
 
 
-def safe_name(name):
-    return ''.join('_' if c in FILENAME_FORBIDDEN or ord(c) < 32 else c for c in name)
-
-
 def build_voice_names(sc_path):
     """Return {voice_id: (file_stem, csv_row)} computed from sc.cpk."""
     glyphs = GLYPHS
     scripts = read_scripts(sc_path)
     per_script = {stem: voiced_lines(scripts[stem], glyphs) for stem in BLOCK_ORDER}
 
-    # main speaker of each character id, used to name voice-only lines
-    speakers = {}
-    for lines in per_script.values():
-        for _, character, speaker, _ in lines:
-            if speaker:
-                speakers.setdefault(character, {}).setdefault(speaker, 0)
-                speakers[character][speaker] += 1
-    main_speaker = {c: max(s, key=s.get) for c, s in speakers.items()}
-
+    # File names are ASCII: the character number, plus the romaji name of the characters
+    # we know (CHARACTER_NAMES); the speaker name shown by the game is in voices.csv.
     names = {}
     voice_id = 0
     for stem in BLOCK_ORDER:
         for msg_id, character, speaker, text in per_script[stem]:
-            shown = speaker or main_speaker.get(character, 'char%02d' % character)
-            stem_name = 'sc%s_msg%04d_chr%02d_%s' % (stem, msg_id, character, safe_name(shown))
+            who = 'chr%02d' % character
+            if character in CHARACTER_NAMES:
+                who += '_' + CHARACTER_NAMES[character]
+            stem_name = 'sc%s_msg%04d_%s' % (stem, msg_id, who)
             names[voice_id] = (stem_name, [stem, msg_id, character, speaker, text])
             voice_id += 1
     return names

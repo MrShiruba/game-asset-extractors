@@ -116,7 +116,7 @@ def extract(path, output_dir, verbose=False, archive_label='', voice_names=None,
                     relative = os.path.join(type_name, '%s_00-%02d%s' % (stem, len(streams) - 1, extension))
                     data = b''                               # nothing else to write
                 elif archive_label == 'union' and stem.isdigit() and int(stem) in MINIGAME_SFX:
-                    type_name = os.path.join('acx', 'ミニゲーム-sfx')
+                    type_name = os.path.join('acx', 'minigame-sfx')
                     stem = '%s-%s' % (stem, MINIGAME_SFX[int(stem)])
             if images:
                 type_name = png_folder(archive_label, stem)
@@ -158,7 +158,7 @@ def extract(path, output_dir, verbose=False, archive_label='', voice_names=None,
                 detected = 'font' if font else 'image'      # the game's own image / font formats
             file_rows.append([original_id, size, len(data) or size, detected,
                               ' ; '.join(w.replace(os.sep, '/') for w in written)])
-            grouped = 'ミニゲーム' in type_name or 'system-voices' in type_name
+            grouped = 'minigame' in type_name or 'system-voices' in type_name
             group = os.path.join(*type_name.split(os.sep)[:2]) if grouped else type_name
             if voice_names is not None:
                 group = type_name.split(os.sep)[0]
