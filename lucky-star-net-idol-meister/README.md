@@ -107,7 +107,7 @@ ahx_encrypted/prologue/chr00_こなた/sc00000/sc00000_msg0001_chr00_こなた.a
 | IDs | Folder | Content |
 |---|---|---|
 | 00000–00044 | `adx/bgm/` | music |
-| 00045–00067 | `adx/ボイストレーニング/` | singing voices of that mini-game |
+| 00045–00067 | `adx/ボイストレーニング/` | singing voices of that mini-game, one per character |
 | 00068–00242 | `adx/se/` | sound effects, with the number the scripts use |
 | 00243–00250 | `adx/ambient/` | looping ambience |
 | 00251–00450 | `ahx_encrypted/ローカルオーディション/` | one voice per question of the モノマネ大会 quiz category |
@@ -117,7 +117,7 @@ ahx_encrypted/prologue/chr00_こなた/sc00000/sc00000_msg0001_chr00_こなた.a
 | 01237–01463 | `png/bg/` | backgrounds |
 | 01464–02925 | `png/tachie/<character>/` | character sprites |
 | 02926–02962 | `png/<screen>/` | interface screens |
-| 02963–03238 | `png/ミニゲーム/<mini-game>/`, `acx/ミニゲーム-sfx/`, `ahx/ミニゲーム-voices/` | mini-games: images, sound effects, per-character voices |
+| 02963–03238 | `png/ミニゲーム/<mini-game>/`, `acx/ミニゲーム-sfx/`, `ahx/ミニゲーム-voices/<mini-game>/chrNN_<name>/` | mini-games: images, sound effects, per-character voices |
 | 03239–03247 | `png/<screen>/` | interface screens |
 | 03248–03255 | `png/ミニゲーム/<mini-game>/` | 8 GIM previews of the mini-game menu |
 

@@ -207,18 +207,19 @@ BLOCK_ORDER = """
 # numbering matches the file counts exactly and was checked by ear.
 # Two groups are never called by the scripts (the mini-game / map code plays them); their
 # folder names are ours:
-#     45-67    ボイストレーニング  singing voices of that mini-game
+#     45-67    ボイストレーニング  singing voices of that mini-game, one per character in
+#                             character order: 045-chr00_こなた.adx ... 067-chr22_チェリー.adx
 #     243-250  ambient        looping ambience (car, waves, alarm...)
 # Each group gets its own folder under adx/ and files keep their union index; sound
 # effects also get the number the scripts use: adx/bgm/000.adx, adx/se/068-se000.adx.
 SOUND_FILES = {}
 SOUND_FILES.update({n: ('bgm', None) for n in range(45)})
-SOUND_FILES.update({45 + n: ('ボイストレーニング', None) for n in range(23)})
+SOUND_FILES.update({45 + n: ('ボイストレーニング', 'chr%02d_%s' % (n, CHARACTERS[n])) for n in range(23)})
 SOUND_FILES.update({68 + n: ('se', 'se%03d' % n) for n in range(175)})
 SOUND_FILES.update({243 + n: ('ambient', None) for n in range(8)})
 
 # union ACX holding ADX: the sound effects of each mini-game, written to
-# acx/ミニゲーム-sfx/<mini-game>/<id>.acx. Names as written in the game's ミニ☆ゲーム menu.
+# acx/ミニゲーム-sfx/<id>-<mini-game>.acx. Names as written in the game's ミニ☆ゲーム menu.
 MINIGAME_SFX = {
     2964: '握手会',
     2989: 'ブログ炎上',
@@ -231,7 +232,7 @@ MINIGAME_SFX = {
 
 # union ACX holding AHX: mini-game voices, one ACX per character, 23 in a row in the order
 # of the character select screen = the character numbers of the scripts (00 こなた ...
-# 22 チェリー). Written to ahx/ミニゲーム-voices/<mini-game>/<id>-<name>/<id>_<track>.ahx;
+# 22 チェリー). Written to ahx/ミニゲーム-voices/<mini-game>/chrNN_<name>/<id>_<track>.ahx;
 # the first tracks of each ACX are lines shared by all characters (identical copies).
 MINIGAME_VOICES = {
     2965: '握手会',
@@ -396,7 +397,7 @@ OTHER_VOICES = {911: (os.path.join('ahx', 'story'), '00911')}
 # run of 23 files in character order (00 こなた ... 22 チェリー). Situations were identified
 # by ear (names are ours; day-start-1..4 / day-end-1..5 are the variants the game picks
 # from at the start / end of a day). Written to
-# ahx/system-voices/<situation>/<id>-<character>.ahx
+# ahx/system-voices/<situation>/<id>-chrNN_<character>.ahx
 MENU_VOICES_FIRST = 451
 MENU_VOICE_SITUATIONS = [
     'title-call', 'day-start-1', 'day-start-2', 'day-start-3', 'day-start-4',
@@ -414,14 +415,14 @@ def menu_voice_path(file_id):
         return None
     situation, character = divmod(k, len(CHARACTERS))
     folder = os.path.join('ahx', 'system-voices', MENU_VOICE_SITUATIONS[situation])
-    return folder, '%05d-%s' % (file_id, CHARACTERS[character])
+    return folder, '%05d-chr%02d_%s' % (file_id, character, CHARACTERS[character])
 
 
 def minigame_voice_folder(file_id):
     for first, game in MINIGAME_VOICES.items():
         if first <= file_id < first + len(CHARACTERS):
             n = file_id - first
-            return os.path.join('ahx', 'ミニゲーム-voices', game, '%05d-%s' % (file_id, CHARACTERS[n]))
+            return os.path.join('ahx', 'ミニゲーム-voices', game, 'chr%02d_%s' % (n, CHARACTERS[n]))
     return None
 
 

@@ -13,9 +13,9 @@ What comes from the game and what does not:
                    .adx / .ahx  official CRI format names, detected from the file header
                    .gim         standard PSP image, already converted: its frames are in png/,
                                 the original is kept in gim-converted-to-png/ for reference
-                   .acx         union: mini-game sound effects, in acx/ミニゲーム-sfx/<game>/
+                   .acx         union: mini-game sound effects, as acx/ミニゲーム-sfx/<id>-<game>.acx
                                 ACX of AHX (mini-game voices, one per character) are split
-                                into ahx/ミニゲーム-voices/<game>/<id>-<name>/<id>_<track>.ahx
+                                into ahx/ミニゲーム-voices/<game>/chrNN_<name>/<id>_<track>.ahx
                    .sc          files of sc.cpk (dialogue scripts and the quiz table),
                                 named after their archive, kept raw, sorted in folders
                                 (prologue, PV配信 per character or unit, endings...)

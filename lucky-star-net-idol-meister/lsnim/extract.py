@@ -116,7 +116,8 @@ def extract(path, output_dir, verbose=False, archive_label='', voice_names=None,
                     relative = os.path.join(type_name, '%s_00-%02d%s' % (stem, len(streams) - 1, extension))
                     data = b''                               # nothing else to write
                 elif archive_label == 'union' and stem.isdigit() and int(stem) in MINIGAME_SFX:
-                    type_name = os.path.join('acx', 'ミニゲーム-sfx', MINIGAME_SFX[int(stem)])
+                    type_name = os.path.join('acx', 'ミニゲーム-sfx')
+                    stem = '%s-%s' % (stem, MINIGAME_SFX[int(stem)])
             if images:
                 type_name = png_folder(archive_label, stem)
                 for k, rgba in enumerate(images):
