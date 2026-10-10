@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+# game data and extraction output never go in the repository
+out/
+*.cpk
+*.bin
+*.acx
+*.pmf
+*.iso
+*.cso
