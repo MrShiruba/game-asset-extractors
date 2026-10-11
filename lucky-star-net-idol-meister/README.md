@@ -91,15 +91,16 @@ every name below was added by this tool (see [Names](#names)).
 
 ### vo.cpk — 23,487 voice lines
 
-One AHX per voiced line, in script order. Files are named after the line they belong to
-and sorted like the scripts, one folder per script:
+One AHX per voiced line, in script order. Files are named after their ID and the line
+they belong to, and sorted like the scripts, one folder per script:
 
 ```
-ahx_encrypted/prologue/chr00_konata/sc00000/sc00000_msg0001_chr00_konata.ahx
-                                            │       │       │     └ name of the character, when it is a known one
-                                            │       │       └ character number stored in the script
-                                            │       └ message number stored in the script
-                                            └ script 00000 of sc.cpk
+ahx_encrypted/prologue/chr00_konata/sc00000/00001_sc00000_msg0001_chr00_konata.ahx
+                                            │     │       │       │     └ name of the character, when it is a known one
+                                            │     │       │       └ character number stored in the script
+                                            │     │       └ message number stored in the script
+                                            │     └ script 00000 of sc.cpk
+                                            └ ID in vo.cpk
 ```
 
 ### union.cpk — 3,256 files
@@ -113,7 +114,7 @@ ahx_encrypted/prologue/chr00_konata/sc00000/sc00000_msg0001_chr00_konata.ahx
 | 00251–00450 | `ahx_encrypted/local-audition/` | one voice per question of the モノマネ大会 quiz category |
 | 00451–00910 | `ahx_encrypted/system-voices/<situation>/` | 20 situations x 23 characters |
 | 00911 | `ahx_encrypted/story/` | narration of the game intro |
-| 00912–01236 | `png/album-kanshou/` | event CGs, named `<album rank>-<id>.png` |
+| 00912–01236 | `png/album-kanshou/` | event CGs, named `<id>-album<rank>.png` (rank in the game's album) |
 | 01237–01463 | `png/bg/` | backgrounds |
 | 01464–02925 | `png/tachie/<character>/` | character sprites |
 | 02926–02962 | `png/<screen>/` | interface screens |
@@ -163,8 +164,8 @@ ASCII only, to stay easy to type and to script:
   `kou`, `soujirou`), and loanwords in **English** (`voice-training`, `minigame`);
 - the categories we made up are in English: `prologue`, `endings`, `story`, `bgm`, `se`,
   `system-voices`, `tachie`…
-- numbers in file names are the original IDs, or numbers stored in the scripts (`msg`,
-  `chr`). `unitNN` and the `Q` of quiz questions are ours.
+- every file name starts with the ID of the file in its archive; the other numbers are
+  stored in the scripts (`msg`, `chr`). `unitNN` and the `Q` of quiz questions are ours.
 
 | In the output | In the game |
 |---|---|

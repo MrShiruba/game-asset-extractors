@@ -213,10 +213,10 @@ BLOCK_ORDER = """
 # Two groups are never called by the scripts (the mini-game / map code plays them); their
 # folder names are ours:
 #     45-67    voice-training  singing voices of the ボイストレーニング mini-game, one per character
-#                             in character order: 045-chr00_konata.adx ... 067-chr22_cherry.adx
+#                             in character order: 00045-chr00_konata.adx ... 00067-chr22_cherry.adx
 #     243-250  ambient        looping ambience (car, waves, alarm...)
 # Each group gets its own folder under adx/ and files keep their union index; sound
-# effects also get the number the scripts use: adx/bgm/000.adx, adx/se/068-se000.adx.
+# effects also get the number the scripts use: adx/bgm/00000.adx, adx/se/00068-se000.adx.
 SOUND_FILES = {}
 SOUND_FILES.update({n: ('bgm', None) for n in range(45)})
 SOUND_FILES.update({45 + n: ('voice-training', 'chr%02d_%s' % (n, CHARACTER_IDS[n])) for n in range(23)})
@@ -330,7 +330,7 @@ CHARACTER_NAMES[31] = 'narration'        # ナレーション
 
 # Order of the event CGs in the アルバム☆鑑賞 album: entry k (k = 0..324) shows union file
 # 912 + ALBUM_ORDER[k] (u16 table at file offset 0x14ddb0 of ULJM05542 EBOOT.BIN).
-# CGs are named <album rank 001-325>-<union id>, e.g. png/album-kanshou/003-01150.png.
+# CGs are named <union id>-album<rank 001-325>, e.g. png/album-kanshou/01150-album003.png.
 ALBUM_ORDER = struct.unpack('<325H', bytes.fromhex(
     '00000100ee00020003000400050006000700080009000a000b000c000d000e000f001000110012001300150014001600'
     '1700180019001a001b001c001d001f001e0020002100220023002400250026002700280029002a002b002c002d002e00'

@@ -55,8 +55,8 @@ def extract(path, output_dir, verbose=False, archive_label='', voice_names=None,
             elif archive_label == 'union' and stem.isdigit() and type_name.startswith('adx'):
                 if int(stem) in SOUND_FILES:
                     group, number = SOUND_FILES[int(stem)]
-                    type_name = 'adx/' + group                       # e.g. adx/bgm/000.adx
-                    stem = '%03d' % int(stem) + ('-' + number if number else '')
+                    type_name = 'adx/' + group                       # e.g. adx/bgm/00000.adx
+                    stem = '%05d' % int(stem) + ('-' + number if number else '')
             elif archive_label == 'union' and stem.isdigit() and type_name.startswith('ahx'):
                 voice = menu_voice_path(int(stem)) or quiz_voice_path(int(stem))
                 voice = OTHER_VOICES.get(int(stem), voice)
@@ -126,7 +126,7 @@ def extract(path, output_dir, verbose=False, archive_label='', voice_names=None,
                     else:
                         name = stem + ('_%02d' % k if len(images) > 1 else '') + '.png'
                     if archive_label == 'union' and stem.isdigit() and int(stem) in ALBUM_RANK:
-                        name = '%03d-%s' % (ALBUM_RANK[int(stem)], name)
+                        name = name.replace('.png', '-album%03d.png' % ALBUM_RANK[int(stem)])
                     relative = os.path.join(type_name, name)
                     written.append(relative)
                     target = os.path.join(output_dir, relative)

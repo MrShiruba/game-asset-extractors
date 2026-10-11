@@ -267,7 +267,7 @@ def build_voice_names(sc_path):
     scripts = read_scripts(sc_path)
     per_script = {stem: voiced_lines(scripts[stem], glyphs) for stem in BLOCK_ORDER}
 
-    # File names are ASCII: the character number, plus the romaji name of the characters
+    # File names start with the vo.cpk ID, then the script line. They are ASCII: the character number, plus the romaji name of the characters
     # we know (CHARACTER_NAMES); the speaker name shown by the game is in voices.csv.
     names = {}
     voice_id = 0
@@ -276,7 +276,7 @@ def build_voice_names(sc_path):
             who = 'chr%02d' % character
             if character in CHARACTER_NAMES:
                 who += '_' + CHARACTER_NAMES[character]
-            stem_name = 'sc%s_msg%04d_%s' % (stem, msg_id, who)
+            stem_name = '%05d_sc%s_msg%04d_%s' % (voice_id, stem, msg_id, who)
             names[voice_id] = (stem_name, [stem, msg_id, character, speaker, text])
             voice_id += 1
     return names
