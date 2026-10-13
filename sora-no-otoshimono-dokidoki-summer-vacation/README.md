@@ -1,13 +1,13 @@
-# ptd_extract
+# Sora no Otoshimono: DokiDoki Summer Vacation – .ptd extractor
 
-Extractor for the `.ptd` (PETA) archives of **Sora no Otoshimono: DokiDoki Summer Vacation** (PSP, `ULJM05639`).
+An extractor for the `.ptd` (PETA) archives of **Sora no Otoshimono: DokiDoki Summer Vacation** (そらのおとしもの -ドキドキサマーバケーション-, **PSP**, `ULJM05639`).
 
 Generic ADX rippers can pull the voice files out of `voice_adx.ptd`, but only as numbered blobs. This tool reads the archive's own (encrypted) file table, so every file comes out with its **original name and path**, in its **original format**.
 
 ## Requirements
 
-- Python 3.6+
-- No third-party dependencies
+- **Python 3.6 or later**, no modules to install
+- You need your own copy of the game: copy `PSP_GAME/USRDIR/res/` from the disc
 
 ## Usage
 
@@ -132,6 +132,14 @@ The data is a plain LZSS stream. A flag byte is read MSB first, and each bit con
   - `distance = ((b0 & ((1 << s) - 1)) << 8 | b1) + 1`
   - copy `length` bytes from `distance` bytes back in the output.
 
+## Disclaimer
+
+- This project is **not affiliated** with the publishers or developers of the game.
+- **No game data** is included or distributed here: you need your own copy of the game.
+- The script is an independent implementation, written from the reverse engineering of the
+  file format for interoperability purposes. It contains no code from the game.
+
 ## License
 
-Do whatever you want with this script. The game data belongs to its respective owners; only use this on a copy of a game you own.
+This project is released under **The Unlicense** (public domain). See the `LICENSE` file
+at the root of the repository.
