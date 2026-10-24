@@ -1,0 +1,14 @@
+# No game data in the repository
+*.bin
+*.BIN
+*.cue
+*.iso
+*.DAT
+*.PCM
+*.CPK
+*.AIF
+output/
+sounds/
+out/
+__pycache__/
+*.pyc
