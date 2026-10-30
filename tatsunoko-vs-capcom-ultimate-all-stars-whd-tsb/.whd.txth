@@ -1,0 +1,16 @@
+codec = NGC_DSP
+channels = 1
+
+base_offset = @0x0c:BE
+start_offset = base_offset + 0x10
+base_offset = @0x04:BE * 4 + 15 / 16 * 16 + base_offset + 0x10 + @0x08:BE - 0x0a
+
+subsong_count = data_size + start_offset + 0x3b - base_offset / 0x46
+subsong_spacing = 0x46
+
+sample_rate = @0x00:BE$2
+start_offset = @0x0e:BE / 2 + start_offset - 1
+sample_type = bytes
+num_samples = @0x0a:BE - @0x0e:BE / 2
+coef_offset = 0x12
+coef_endianness = BE
