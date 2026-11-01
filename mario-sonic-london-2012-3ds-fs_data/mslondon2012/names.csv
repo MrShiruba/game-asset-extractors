@@ -1,0 +1,172 @@
+# file;name;confidence;note;check (first waveform name of this ACB from its cues, used to detect another numbering)
+# Names for fs_data.cpk entries (file numbers as written by mslondon2012extract.py).
+# confidence: sure / probable / unknown. Corrections welcome.
+1399;se_crowd_a;sure;matched from cue names;Ambience_Left
+1400;se_crowd_b;sure;matched from cue names;Ambience_Left
+1401;se_swimming_crawl;probable;sound effects stored in the music group;Accel_GD_Left
+1402;se_aquatics_backstroke;sure;matched from cue names;Kick_Left
+1403;se_aquatics_breaststroke;probable;matched from cue names;Change
+1404;se_aquatics_freestyle;sure;matched from cue names;Accel
+1405;se_aquatics_marathon_swim;sure;matched from cue names;Dive_Left
+1406;se_aquatics_synchronised_swimming;probable;matched from cue names;Count
+1407;se_aquatics_synchronised_diving;sure;matched from cue names;Bad_Left
+1408;se_aquatics_water_polo;sure;matched from cue names;Catch
+1409;se_archery_team;probable;event order (arcin0 < arcte0);Bow
+1410;se_archery_individual;probable;event order (arcin0 < arcte0);Bow
+1411;se_athletics_100m;sure;matched from cue names;Breast_Left
+1412;se_athletics_1500m;probable;slot of event code ath150;Land
+1413;se_athletics_hammer;sure;matched from cue names;Fence
+1414;se_athletics_hurdles;sure;matched from cue names;Jump
+1415;se_athletics_javelin;probable;matched from cue names;Bad_Left
+1416;se_athletics_long_jump;sure;matched from cue names;Cut_In
+1417;se_athletics_marathon;sure;matched from cue names;Catch
+1418;se_athletics_pole_vault;sure;matched from cue names;Bar
+1419;se_athletics_relay;sure;matched from cue names;Baton
+1420;se_athletics_steeplechase;sure;matched from cue names;Bump
+1421;se_athletics_shot_put;sure;matched from cue names;Effect_B_Left
+1422;se_athletics_triple_jump;probable;matched from cue names;Metronome
+1423;se_badminton_doubles;probable;event order (baddo0 < badsi0);Impact
+1424;se_badge_machine;sure;Lever, Capsule_Drop... (Record Log badge machine);Capsule_Drop
+1425;se_badminton_singles;probable;event order (baddo0 < badsi0);Fall
+1426;se_basketball;sure;matched from cue names;Back_board_01
+1427;bgm_swim_back;sure;from cue names;Swim_Back
+1429;bgm_swim_breast;sure;from cue names;Swim_Breast_A
+1431;bgm_synchro_duet;sure;from cue names;Synchro_Duet
+1433;bgm_swim_free;sure;from cue names;Swim_Free
+1435;bgm_open_water;sure;from cue names;Open_Water
+1437;bgm_synchro_dive;sure;from cue names;Synchro_Dive_A
+1439;bgm_synchro_team;sure;from cue names;Synchro_Team
+1441;bgm_water_polo;sure;from cue names;Water_Polo_01
+1443;bgm_archery_solo;sure;from cue names;Archery_Solo
+1445;bgm_archery_team;sure;from cue names;Archery_Team_A
+1447;bgm_run100;sure;from cue names;Run100_A
+1449;bgm_hammer;sure;from cue names;Hammer_A_01
+1451;bgm_run_hurdles;sure;from cue names;Run_Hurdles
+1453;bgm_javelin;sure;from cue names;Javelin_A_01
+1455;bgm_long_jump;sure;from cue names;Long_Jump_A_01
+1457;bgm_marathon;sure;from cue names;Marathon
+1459;bgm_pole_vault;sure;from cue names;Pole_Vault_1
+1461;bgm_run4x100;sure;from cue names;Run4x100
+1463;bgm_run_steeple;sure;from cue names;Run_Steeple
+1465;bgm_shot_put;sure;from cue names;Shot_Put_A_01
+1467;bgm_triple_jump;sure;from cue names;Triple_Jump
+1469;bgm_basket_ball;sure;from cue names;Basket_Ball
+1471;bgm_boxing;sure;from cue names;Boxing_A
+1473;bgm_canoe;sure;from cue names;Canoe
+1475;bgm_kayak;sure;from cue names;Kayak
+1477;bgm_cyc_bmx;sure;from cue names;Cyc_BMX_A
+1479;bgm_cyc_keirin;sure;from cue names;Cyc_Keirin
+1481;bgm_cyc_point;sure;from cue names;Cyc_Point
+1483;bgm_cyc_sprint;sure;from cue names;Cyc_Sprint_A1
+1485;bgm_horse_jump_t;sure;from cue names;Horse_Jump_T_01
+1487;bgm_fencing_epee;sure;from cue names;Fencing_Epee
+1489;bgm_soccer;sure;from cue names;Soccer
+1491;bgm_balance_beam;sure;from cue names;Balance_Beam_A
+1493;bgm_floor_exercises;sure;from cue names;Floor_Exercises
+1495;bgm_horizontal_bar;sure;from cue names;HorizontalBar_A00
+1497;bgm_rhythmic_ribbon;sure;from cue names;Rhythmic_Ribbon_A
+1499;bgm_rings;sure;from cue names;Rings_01
+1501;bgm_trampoline;sure;from cue names;Trampoline_01
+1503;bgm_handball;sure;from cue names;Handball_A
+1505;bgm_hockey;sure;from cue names;Hockey
+1507;bgm_judo;sure;from cue names;Judo_Kime_A
+1509;bgm_rowing_quad;sure;from cue names;Rowing_Quad_A
+1511;bgm_sailing470;sure;from cue names;Sailing470
+1513;bgm_double_trap;sure;from cue names;Double_Trap
+1515;bgm_pistol;sure;from cue names;Pistol_A
+1517;bgm_menus;sure;Title, Main_Menu...;Badge_Machine
+1519;bgm_table_tennis;sure;from cue names;Table_Tennis
+1521;bgm_taekwondo;sure;from cue names;Taekwondo
+1523;bgm_tennis;sure;from cue names;Tennis
+1525;bgm_tri;sure;from cue names;Tri_Cycle_01
+1527;bgm_beach_volley;sure;from cue names;Beach_Volley
+1529;bgm_weight_lifting;sure;from cue names;Weight_Lifting_01
+1531;bgm_wrestling;sure;from cue names;Wrestling
+1533;se_boxing;sure;matched from cue names;Butting
+1534;atom_config;sure;ACF (CRI Atom sound configuration);
+1535;se_canoe_slalom;sure;matched from cue names;GAUGE_Left
+1536;se_canoe_sprint;sure;matched from cue names;Dash_Left
+1537;se_cycling_bmx;sure;matched from cue names;Bump
+1538;se_cycling_keirin;sure;matched from cue names;Accel
+1539;se_athletics_100m_story;probable;same cues as the regular event, story mode variant?;Breast_Left
+1540;se_athletics_long_jump_story;probable;same cues as the regular event, story mode variant?;Cut_In
+1541;se_athletics_steeplechase_story;probable;same cues as the regular event, story mode variant?;Bump
+1542;se_athletics_shot_put_story;probable;same cues as the regular event, story mode variant?;Effect_B_Left
+1543;se_basketball_story;probable;same cues as the regular event, story mode variant?;Back_board
+1544;se_gymnastics_floor_story;probable;same cues as the regular event, story mode variant?;Keep_Great
+1545;se_gymnastics_trampoline_story;probable;same cues as the regular event, story mode variant?;Jump_01
+1546;se_sailing_story;probable;same cues as the regular event, story mode variant?;Ambient
+1547;se_story_mode;sure;86 cues, Omochao_Fly, BWJ_Crash...;Applause_L
+1548;se_equestrian_unused;probable;not in the sound bank table, same cues as 1549 without GALLOP_W;Bar
+1549;se_equestrian;sure;matched from cue names;Bar
+1550;se_fencing;sure;matched from cue names;Butting_01
+1551;se_football;sure;matched from cue names;Ball
+1552;se_gymnastics_balance_beam;probable;matched from cue names;Land_BB
+1553;se_gymnastics_floor;probable;matched from cue names;Keep_Great_Left
+1554;se_gymnastics_horizontal_bar;probable;matched from cue names;Jump
+1555;se_gymnastics_rhythmic_ribbon;sure;matched from cue names;Input
+1556;se_gymnastics_rings;probable;matched from cue names;Bar
+1557;se_gymnastics_trampoline;sure;matched from cue names;Jump_01
+1558;se_handball;sure;matched from cue names;Effect_Left
+1559;se_hockey;sure;matched from cue names;Hit1_01
+1560;se_judo;sure;matched from cue names;Button
+1561;se_modern_pentathlon;sure;matched from cue names;Accel
+1562;se_rowing;sure;matched from cue names;OAR_01
+1563;se_sailing;sure;matched from cue names;Ambient
+1564;se_shooting_double_trap;sure;matched from cue names;Bullet
+1565;se_shooting_rifle;probable;matched from cue names;Shot_Mark_Left
+1566;announcer_and_system;sure;matched from cue names;ANO_AMY
+1567;se_story_episodes;sure;matched from cue names;Bridge_Close
+1570;se_menu_ui;sure;CMN_Button, CMN_Cancel... (not in the sound bank table);CMN_Button
+1571;se_table_tennis;sure;matched from cue names;Bound_01
+1572;se_taekwondo;sure;matched from cue names;Burst
+1573;se_tennis;sure;matched from cue names;Bound
+1574;anthem_japan;sure;matched from cue names;JPN
+1575;anthems_other;sure;matched from cue names;ENG
+1578;se_triathlon;sure;matched from cue names;Crawl_L
+1579;se_beach_volleyball;sure;matched from cue names;Block
+1580;voice_amy;sure;AMY;B_Suc
+1582;voice_big;sure;;Bad
+1584;voice_blaze;sure;BLZ;B_Suc
+1586;voice_bullet_bill;sure;Bullet Bill (sound effects only), code between BLZ and BWJ;Call
+1588;voice_bowser_jr;sure;BWJ;B_Suc
+1590;voice_bowser;sure;BWS;B_Suc
+1592;voice_cbot;sure;Cubot (with Orbot), code between BWS and Chao;Damage1
+1594;voice_chao;sure;;Conv
+1596;voice_charmy;sure;;B_Suc
+1598;voice_cream;sure;;B_Suc
+1600;voice_dry_bones;sure;Skelerex / Karon;Call
+1602;voice_dry_bowser;sure;Hone Koopa;B_Suc
+1604;voice_donkey_kong;sure;DKK;B_Suc
+1606;voice_daisy;sure;DSY;B_Suc
+1608;voice_eggman;sure;EGG;B_Suc
+1610;voice_eggman_nega;sure;same voice actor as Eggman, code between EGG and ESP;B_Suc
+1612;voice_espio;sure;;B_Suc
+1614;voice_heiho;sure;Shy Guy (Maskass);Conv
+1616;voice_jet;sure;;B_Suc
+1618;voice_jugemu;sure;Lakitu;Conv
+1620;voice_king_teresa;sure;King Boo;B_Suc
+1622;voice_kamek;sure;;B_Suc
+1624;voice_kinopio;sure;Toad;B_Suc
+1626;voice_knuckles;sure;KNU;B_Suc
+1628;voice_kuribo;sure;Goomba;Conv
+1630;voice_luigi;sure;LIG;B_Suc
+1632;voice_mario;sure;MRO;B_Suc
+1634;voice_metal_sonic;sure;MSN;B_Suc
+1636;voice_obot;sure;Orbot, code between MSN and Omega;Damage1
+1638;voice_omega;sure;;B_Suc
+1640;voice_omochao;sure;;Conv
+1642;voice_peach;sure;PCH;B_Suc
+1644;voice_rouge;sure;;B_Suc
+1646;voice_shadow;sure;SDW;B_Suc
+1648;voice_silver;sure;SLV;B_Suc
+1650;voice_sonic;sure;SNC;B_Suc
+1652;voice_tails;sure;TLS;B_Suc
+1654;voice_teresa;sure;Boo;Conv
+1656;voice_vector;sure;VCT;B_Suc
+1658;voice_waluigi;sure;WLG;B_Suc
+1660;voice_wario;sure;WRO;B_Suc
+1662;voice_yoshi;sure;YSH;B_Suc
+1664;se_weightlifting;sure;matched from cue names;Buzzer
+1665;se_misc_events;unknown;matched from cue names;Cheer_Left
+1666;se_wrestling;sure;matched from cue names;Hit
