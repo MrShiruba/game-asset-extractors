@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+# ROMs are not distributed
+*.zip
