@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brsar-sfx"
+version = "1.0.0"
+description = "Extract sound effects from Wii NW4R sound archives (.brsar) by re-playing their sequences"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = ["numpy>=1.20"]
+
+[project.optional-dependencies]
+fast = ["scipy"]
+test = ["pytest"]
+
+[project.scripts]
+brsar-sfx = "brsar_sfx.cli:main"
+
+[tool.setuptools]
+packages = ["brsar_sfx"]
