@@ -2,140 +2,78 @@
 """
 PETA (.ptd) extractor - Sora no Otoshimono DokiDoki Summer Vacation (PSP, ULJM05639)
 
-Extracts every file with its original name and path, in its original format
-(ADX stays ADX, GIM stays GIM, ...). Nested .ptd archives (res/__pack__/*.ptd)
-are kept as-is AND their contents are extracted too.
+Extracts every file with its original name and path, in its original format.
+Nested .ptd archives are kept as-is AND their contents are extracted too.
 
-Format (reverse-engineered from EBOOT functions 0x62d4 / 0x66b4 / 0x67a4 / 0x78c0):
+Game-specific formats are also unpacked next to the original file
+(the original is kept):
 
-  Header (0x120 bytes)
-    0x00  'PETA'
-    0x04  u32  header + table size (table ends here)
-    0x08  u32  total archive size
-    0x0C  u32  table offset (0x120)
-    0x10  u32  file count
-    0x14  u16  directory count
-    0x16  u8   table encrypted (1/0)
-    0x20  256  substitution key
+  .fab / .fsb -> <name>_tex/*.gim   embedded GIM textures
+  .vgp        -> <name>_vag/*.vag   sound bank split into standard VAG files
+  .tfp        -> .png + .txt        font glyph atlas + character map
+  .sos        -> .txt               script string table (UTF-8)
 
-  Table decryption (i = position from 0x120):
-    plain[i] = key[(cipher[i] ^ -i) & 0xFF]
-
-  Table
-    directories: 0x50-byte entries -> +0 file entries offset, +4 first file index,
-                                      +8 file count, +0x10 name (64 bytes)
-    files:       0x40-byte entries -> +0 offset, +4 size, +8 compressed (u8),
-                                      +0x10 name (48 bytes)
-
-  'YKLZ' compression (LZSS), used by the game itself (not an audio/image codec):
-    0x00 'YKLZ', 0x06 u8 compressed, 0x07 u8 bits (length = b0 >> (bits-8)),
-    0x08 u32 decompressed size, data at 0x10.
-    Flag byte read MSB first: 0 = literal,
-    1 = reference: b0,b1 -> len = (b0 >> s) + 3 ; dist = ((b0 & ((1<<s)-1)) << 8 | b1) + 1
+Format details are documented in the ptdlib/ modules and in README.md.
 """
 import argparse
+import io
 import os
-import struct
 import sys
 
-
-def yklz_decompress(buf):
-    if buf[:4] != b'YKLZ':
-        raise ValueError('not a YKLZ block')
-    compressed = buf[6]
-    shift = buf[7] - 8
-    size = struct.unpack_from('<I', buf, 8)[0]
-    src = 0x10
-    if not compressed:
-        return bytes(buf[src:src + size])
-    mask = (1 << shift) - 1
-    out = bytearray()
-    while len(out) < size:
-        flags = buf[src]; src += 1
-        for _ in range(8):
-            if len(out) >= size:
-                break
-            if flags & 0x80:
-                b0 = buf[src]; b1 = buf[src + 1]; src += 2
-                length = (b0 >> shift) + 3
-                dist = ((b0 & mask) << 8 | b1) + 1
-                start = len(out) - dist
-                if start < 0:
-                    raise ValueError('LZ reference out of bounds')
-                for k in range(length):
-                    out.append(out[start + k])
-            else:
-                out.append(buf[src]); src += 1
-            flags = (flags << 1) & 0xFF
-    return bytes(out[:size])
+from ptdlib import peta, yklz
+from ptdlib.convert import convert
+from ptdlib.util import write_file
 
 
-def read_table(f, base):
-    f.seek(base)
-    hdr = f.read(0x120)
-    if hdr[:4] != b'PETA':
-        raise ValueError('PETA signature not found at 0x%X' % base)
-    tsize, total, toff, nfiles = struct.unpack_from('<4I', hdr, 4)
-    ndirs = struct.unpack_from('<H', hdr, 0x14)[0]
-    enc = hdr[0x16]
-    key = hdr[0x20:0x120]
-    f.seek(base + toff)
-    t = bytearray(f.read(tsize - toff))
-    if enc:
-        for i in range(len(t)):
-            t[i] = key[(t[i] ^ (-i)) & 0xFF]
-    tab = bytearray(toff) + t  # index by absolute offset within the archive
-    dirs = []
-    for d in range(ndirs):
-        o = toff + d * 0x50
-        foff, first, count = struct.unpack_from('<3I', tab, o)
-        name = bytes(tab[o + 0x10:o + 0x50]).split(b'\0')[0].decode('ascii', 'replace')
-        dirs.append((name, first, count & 0xFFFF))
-    fbase = struct.unpack_from('<I', tab, toff)[0]
-    files = []
-    for i in range(nfiles):
-        o = fbase + i * 0x40
-        off, size = struct.unpack_from('<2I', tab, o)
-        comp = tab[o + 8]
-        name = bytes(tab[o + 0x10:o + 0x40]).split(b'\0')[0].decode('ascii', 'replace')
-        files.append((name, off, size, comp))
-    return dirs, files, total
+def safe_join(root, path):
+    """Join an archive path to the output folder, never escaping it."""
+    parts = [p for p in path.replace('\\', '/').split('/') if p not in ('', '.', '..')]
+    return os.path.join(root, *parts)
 
 
-def extract(f, base, outdir, args, depth=0, label=''):
-    dirs, files, total = read_table(f, base)
-    owner = {}
-    for dname, first, count in dirs:
-        for i in range(first, first + count):
-            owner[i] = dname
+def read_entry(f, off, size, comp, path, head_only=False):
+    """Read one file, undoing YKLZ. With head_only, uncompressed files are
+    only read far enough to check for a nested archive."""
+    f.seek(off)
+    if head_only and not comp:
+        return f.read(4)
+    data = f.read(size)
+    if comp:
+        try:
+            data = yklz.decompress(data)
+        except Exception as e:
+            print('  ! %s: decompression failed (%s), raw data kept' % (path, e), file=sys.stderr)
+    return data
+
+
+def nested(f, off, data, comp):
+    """Return (file, base) to read a nested PETA archive from."""
+    if comp:                       # decompressed copy lives in memory
+        return io.BytesIO(data), 0
+    return f, off                  # stored as-is: read in place
+
+
+def extract(f, base, args, depth=0, label=''):
     n = 0
-    for i, (name, off, size, comp) in enumerate(files):
-        path = (owner.get(i, '') + '/' + name).strip('/')
-        if not args.keep_case:
-            path = path.lower()
-        f.seek(base + off)
+    count = 0
+    for path, off, size, comp in peta.entries(f, base, lower=not args.keep_case):
+        count += 1
+        data = read_entry(f, off, size, comp, path, head_only=args.list)
         if args.list:
-            data = f.read(4)
-            print('%s%-60s off=0x%08X size=%-9d %s' % ('  ' * depth, path, base + off, size, 'LZ' if comp else ''))
+            print('%s%-60s off=0x%08X size=%-9d %s' % ('  ' * depth, path, off, size, 'LZ' if comp else ''))
             n += 1
-            if data == b'PETA' and not comp:
-                n += extract(f, base + off, outdir, args, depth + 1, path)
+            if data[:4] == peta.MAGIC:
+                n += extract(*nested(f, off, data, comp), args, depth + 1, path)
             continue
-        data = f.read(size)
-        if comp:
-            try:
-                data = yklz_decompress(data)
-            except Exception as e:
-                print('  ! %s: decompression failed (%s), raw data kept' % (path, e), file=sys.stderr)
-        dst = os.path.join(outdir, path)
-        os.makedirs(os.path.dirname(dst) or '.', exist_ok=True)
-        with open(dst, 'wb') as o:
-            o.write(data)
+        dst = safe_join(args.out, path)
+        write_file(dst, data)
         n += 1
-        if data[:4] == b'PETA' and not comp:
-            n += extract(f, base + off, outdir, args, depth + 1, path)
+        if data[:4] == peta.MAGIC:
+            n += extract(*nested(f, off, data, comp), args, depth + 1, path)
+        else:
+            n += convert(dst, data, not args.keep_case)
     if not args.list:
-        print('%s%s: %d files' % ('  ' * depth, label or f.name, len(files)))
+        print('%s%s: %d files' % ('  ' * depth, label or getattr(f, 'name', '?'), count))
     return n
 
 
@@ -150,7 +88,7 @@ def main():
     total = 0
     for p in args.ptd:
         with open(p, 'rb') as f:
-            total += extract(f, 0, args.out, args, label=p)
+            total += extract(f, 0, args, label=p)
     if not args.list:
         print('Done: %d files written to %s/' % (total, args.out))
 
