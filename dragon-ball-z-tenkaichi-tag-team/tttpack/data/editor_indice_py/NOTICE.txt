@@ -1,0 +1,15 @@
+The files in this folder (except this NOTICE) are copied unchanged from
+Editor_indice_Py by kastomd, https://github.com/kastomd/Editor_indice_Py
+(commit 60ea9eed11b1c1430d5b42b5ae8ab36bc01cd387), licensed under the Apache License 2.0
+(see LICENSE.txt in this folder).
+
+    LISTA_PACKFILE.txt        app_md/windows/scr/       names of the 14097 PACKFILE entries
+    patch.txt                 app_md/windows/scr/       parts of a character archive (497 parts)
+    05_effect_common.txt      app_md/windows/scr/       parts of its effect_common sub-archive
+    menu_stroy_mode_pack.txt  app_md/windows/scr/       parts of the story mode menu archive
+    LISTA_VO_TTT.txt          app_md/exvoices/          the battle voice lines of a character
+    sfx_ch.txt                app_md/windows/scr/       samples of a character's sound bank (97)
+    sfx_bt.txt                app_md/windows/scr/       samples of the battle sound bank (85)
+
+Their numbering starts at 1; ttt-unpack (tttpack/names.py) reads them and converts
+to the 0-based PACKFILE / part / sample numbers it uses.

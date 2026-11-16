@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+packfile_out/
+*.BIN
+sample*.bin
+.pytest_cache/
