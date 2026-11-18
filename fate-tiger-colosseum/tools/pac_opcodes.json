@@ -1,0 +1,1793 @@
+{
+"0": {
+"name": "core",
+"ops": [
+{
+"name": "null",
+"args": []
+},
+{
+"name": "cmd_end",
+"args": []
+},
+{
+"name": "cmd_jmp",
+"args": [
+"r4"
+]
+},
+{
+"name": "cmd_call",
+"args": [
+"r4"
+]
+},
+{
+"name": "cmd_result",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_resJmp",
+"args": [
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_resCall",
+"args": [
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_mov",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_add",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_sub",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_mul",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_div",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_inc",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_dec",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_loop",
+"args": [
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_waitFrame",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_waitTime",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_rand",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_iand",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_ior",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_ixor",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_ifEQ",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifNE",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifLSE",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifLBE",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifLS",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifLB",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifAND",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifOR",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallEQ",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallNE",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallLSE",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallLBE",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallLS",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallLB",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallAND",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_ifCallOR",
+"args": [
+"t4",
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_flgSet",
+"args": [
+"r1",
+"r4"
+]
+},
+{
+"name": "cmd_flgClr",
+"args": [
+"r1",
+"r4"
+]
+},
+{
+"name": "cmd_flgSetId",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_flgClrId",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_flgMov",
+"args": [
+"r4",
+"r4"
+]
+},
+{
+"name": "cmd_flgAND",
+"args": [
+"r4",
+"r1",
+"r4"
+]
+},
+{
+"name": "cmd_flgOR",
+"args": [
+"r4",
+"r1",
+"r4"
+]
+},
+{
+"name": "cmd_flgZERO",
+"args": [
+"r4",
+"r1",
+"r4"
+]
+},
+{
+"name": "cmd_inxJmp",
+"args": [
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_stkDec",
+"args": []
+},
+{
+"name": "cmd_stkClr",
+"args": []
+},
+{
+"name": "cmd_break",
+"args": [
+"t4",
+"s"
+]
+},
+{
+"name": "cmd_string",
+"args": [
+"s"
+]
+},
+{
+"name": "cmd_print",
+"args": [
+"s",
+"t4"
+]
+},
+{
+"name": "cmd_textOut",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_setSleep",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_sinf",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_cosf",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_abs",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_setLabelId",
+"args": [
+"t4",
+"r4"
+]
+},
+{
+"name": "cmd_callLabelId",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_jmpLabelId",
+"args": [
+"t4"
+]
+},
+{
+"name": "cmd_mod",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_memset",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_memcpy",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_flgMemcpy",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "cmd_stringEnable",
+"args": [
+"t4"
+]
+}
+]
+},
+"1": {
+"name": "message",
+"ops": [
+{
+"name": "null",
+"args": []
+},
+{
+"name": "setCurrentWindow",
+"args": [
+"t4"
+]
+},
+{
+"name": "setWindowPosition",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setWindowName",
+"args": [
+"s",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setWindowNameLabel",
+"args": [
+"r4",
+"L",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setTextOffset",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "showWindow",
+"args": [
+"t4"
+]
+},
+{
+"name": "setFontScale",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setFontColor",
+"args": [
+"t4"
+]
+},
+{
+"name": "waitMessage",
+"args": [
+"t4"
+]
+},
+{
+"name": "setWindowZ",
+"args": [
+"t4"
+]
+},
+{
+"name": "waitPause",
+"args": []
+},
+{
+"name": "showPuaseSymbol",
+"args": []
+},
+{
+"name": "setMessage",
+"args": [
+"s"
+]
+},
+{
+"name": "setMessageLabel",
+"args": [
+"r4",
+"L"
+]
+},
+{
+"name": "clearMessage",
+"args": []
+},
+{
+"name": "loadWindowModel",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setWindowMotion",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "enableMotionLoop",
+"args": [
+"t4"
+]
+},
+{
+"name": "playVoice",
+"args": [
+"t4"
+]
+},
+{
+"name": "loadVoice",
+"args": [
+"t4"
+]
+},
+{
+"name": "clearVoice",
+"args": []
+},
+{
+"name": "waitVoice",
+"args": [
+"t4"
+]
+},
+{
+"name": "playBGM",
+"args": [
+"t4"
+]
+},
+{
+"name": "loadBGM",
+"args": [
+"t4"
+]
+},
+{
+"name": "clearBGM",
+"args": []
+},
+{
+"name": "releaseCache",
+"args": []
+},
+{
+"name": "waitWindowModel",
+"args": [
+"t4"
+]
+},
+{
+"name": "clearWindowModel",
+"args": [
+"t4"
+]
+},
+{
+"name": "fadeMasterVolume",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "fadeBGMVolume",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "fadeVoiceVolume",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "moveWindow",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "stopBGM",
+"args": []
+},
+{
+"name": "waitBGMVolume",
+"args": [
+"t4"
+]
+},
+{
+"name": "setFontCharacterSeparation",
+"args": [
+"t4"
+]
+},
+{
+"name": "setFontInterlinearSpace",
+"args": [
+"t4"
+]
+},
+{
+"name": "setWindowModelColor",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setWindowModelColorAnimation",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "waitWindowModelColorAnimation",
+"args": []
+},
+{
+"name": "setMoveWindow",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "waitMoveWindow",
+"args": [
+"t4"
+]
+},
+{
+"name": "waitAllMoveWindow",
+"args": []
+},
+{
+"name": "setWindowScale",
+"args": [
+"t4"
+]
+},
+{
+"name": "isShowWindow",
+"args": [
+"t4"
+]
+},
+{
+"name": "hideWindows",
+"args": [
+"t4"
+]
+},
+{
+"name": "revertHideWindows",
+"args": []
+},
+{
+"name": "playSE",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "loadSE",
+"args": [
+"t4"
+]
+},
+{
+"name": "clearSE",
+"args": []
+},
+{
+"name": "waitSEAll",
+"args": []
+},
+{
+"name": "waitSE",
+"args": [
+"t4"
+]
+},
+{
+"name": "getLastPlaySEVoiceChannel",
+"args": [
+"t4"
+]
+},
+{
+"name": "stopSEAll",
+"args": []
+},
+{
+"name": "stopSE",
+"args": [
+"t4"
+]
+},
+{
+"name": "fadeSEVolume",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "waitSEVolume",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setTextSpeed",
+"args": [
+"t4"
+]
+},
+{
+"name": "waitPauseEx",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setAutoPlay",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "resetTimer",
+"args": []
+},
+{
+"name": "waitTimer",
+"args": [
+"t4"
+]
+},
+{
+"name": "playVoiceEx",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "playBGMEx",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setVoiceVolume",
+"args": [
+"t4"
+]
+},
+{
+"name": "setBGMVolume",
+"args": [
+"t4"
+]
+},
+{
+"name": "autoSave",
+"args": []
+},
+{
+"name": "autoLoad",
+"args": []
+},
+{
+"name": "addOptionMenuItem",
+"args": [
+"s",
+"r4",
+"t4"
+]
+},
+{
+"name": "setOptionMenuItem",
+"args": [
+"s",
+"r4",
+"t4",
+"t4"
+]
+},
+{
+"name": "clearOptionMenu",
+"args": []
+},
+{
+"name": "enableOptionMenu",
+"args": [
+"t4"
+]
+},
+{
+"name": "addMsgWindowItem",
+"args": [
+"s"
+]
+},
+{
+"name": "setMsgWindowItem",
+"args": [
+"s",
+"t4"
+]
+},
+{
+"name": "clearMsgWindow",
+"args": []
+},
+{
+"name": "enableMsgWindow",
+"args": [
+"t4"
+]
+},
+{
+"name": "setOptionCancelLabel",
+"args": [
+"r4"
+]
+},
+{
+"name": "setMsgWindowForm",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "powerSaveOff",
+"args": [
+"t4"
+]
+},
+{
+"name": "getOptionState",
+"args": [
+"t4"
+]
+},
+{
+"name": "getTimer",
+"args": [
+"t4"
+]
+},
+{
+"name": "setCancelVoice",
+"args": [
+"t4"
+]
+}
+]
+},
+"2": {
+"name": "menu",
+"ops": [
+{
+"name": "null",
+"args": []
+},
+{
+"name": "padDirect",
+"args": [
+"t4"
+]
+},
+{
+"name": "padStand",
+"args": [
+"t4"
+]
+},
+{
+"name": "padRepeat",
+"args": [
+"t4"
+]
+},
+{
+"name": "registToMenu",
+"args": [
+"s",
+"r4"
+]
+},
+{
+"name": "selectMenuItemCall",
+"args": [
+"t4",
+"r4"
+]
+},
+{
+"name": "selectMenuItemJmp",
+"args": [
+"t4",
+"r4"
+]
+},
+{
+"name": "memoryPrint",
+"args": []
+},
+{
+"name": "setMenuPos",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "padRelease",
+"args": [
+"t4"
+]
+}
+]
+},
+"3": {
+"name": "GameSystemCommand",
+"ops": [
+{
+"name": "null",
+"args": []
+},
+{
+"name": "changeState",
+"args": [
+"t4"
+]
+},
+{
+"name": "getCharacterID",
+"args": [
+"t4"
+]
+},
+{
+"name": "getCostumeID",
+"args": [
+"t4"
+]
+},
+{
+"name": "playSystemSE",
+"args": [
+"t4"
+]
+},
+{
+"name": "setCostumeID",
+"args": [
+"t4"
+]
+},
+{
+"name": "setStageID",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "getCharacterCount",
+"args": [
+"t4"
+]
+},
+{
+"name": "getCharacterParam",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setWinner",
+"args": [
+"t4"
+]
+},
+{
+"name": "setRule",
+"args": [
+"t4"
+]
+},
+{
+"name": "setPointLimit",
+"args": [
+"t4"
+]
+},
+{
+"name": "setTimeLimit",
+"args": [
+"t4"
+]
+},
+{
+"name": "getBattleMode",
+"args": [
+"t4"
+]
+},
+{
+"name": "setVersusCharacter",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setVersusRule",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setVersusRuleMessage",
+"args": [
+"s"
+]
+},
+{
+"name": "setVersusRuleMessageLabel",
+"args": [
+"r4",
+"L"
+]
+},
+{
+"name": "setVersusStageID",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setVersusClear",
+"args": []
+},
+{
+"name": "setVersusPoint",
+"args": [
+"t4"
+]
+},
+{
+"name": "getUserDifficulty",
+"args": [
+"t4"
+]
+},
+{
+"name": "doContinue",
+"args": [
+"t4"
+]
+},
+{
+"name": "setBattleBgm",
+"args": [
+"t4"
+]
+}
+]
+},
+"4": {
+"name": "CharacterSetup",
+"ops": [
+{
+"name": "null",
+"args": []
+},
+{
+"name": "setAlpha",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setVoiceTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setBlurEffectTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setVirtualBoneId",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "getCostumeId",
+"args": [
+"t4"
+]
+},
+{
+"name": "createAttackInfo",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setAttackTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "createGuardInfo",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setGuardTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setSystemEffectTimingPlayFixCharacterPosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setSystemEffectTimingPlayCharacterPosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setSystemEffectTimingPlayFixCharacterBonePosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setSystemEffectTimingPlayCharacterBonePosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setStatus",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setCharacterEffectTimingPlayFixCharacterPosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setCharacterEffectTimingPlayCharacterPosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setCharacterEffectTimingPlayFixCharacterBonePosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setCharacterEffectTimingPlayCharacterBonePosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setSpeed",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "fire",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setCharacterTextureCrop",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "createCharacterTextureCropLayer",
+"args": [
+"t4"
+]
+},
+{
+"name": "setShowStageTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setSeTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setVirtualMaterialId",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "setCounterbalanceTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setBasePersonality",
+"args": [
+"r4"
+]
+},
+{
+"name": "setRandomVoiceTiming",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "lookAtMe",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "directionCamera",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setExtendPersonality",
+"args": [
+"r4",
+"r4"
+]
+},
+{
+"name": "setSeTimingOneShot",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setVoiceTimingOneShot",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setRandomVoiceTimingOneShot",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setDifficultyCorrectionValue",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setSeTimingEx",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+}
+]
+},
+"5": {
+"name": "StageSetup",
+"ops": [
+{
+"name": "null",
+"args": []
+},
+{
+"name": "setAlpha",
+"args": [
+"t4",
+"t4"
+]
+},
+{
+"name": "addNpc",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setCharacterColor",
+"args": [
+"t4"
+]
+},
+{
+"name": "setItemAppearancePointCount",
+"args": [
+"t4"
+]
+},
+{
+"name": "setItemInfoCount",
+"args": [
+"t4"
+]
+},
+{
+"name": "setItemAppearancePoint",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "addItemInfo",
+"args": [
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setMaxActiveItemCount",
+"args": [
+"t4"
+]
+},
+{
+"name": "addItemResource",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setStageModelMotion",
+"args": [
+"t4"
+]
+},
+{
+"name": "setStageSubModelMotion",
+"args": [
+"t4"
+]
+},
+{
+"name": "addInitilizePosition",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "setMapNodeMax",
+"args": [
+"r4",
+"r4",
+"r4",
+"r4"
+]
+},
+{
+"name": "appendNode",
+"args": [
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4"
+]
+},
+{
+"name": "connectLink",
+"args": [
+"r4",
+"r4",
+"r4"
+]
+},
+{
+"name": "getDayTime",
+"args": [
+"t4"
+]
+},
+{
+"name": "addEvent",
+"args": [
+"r4",
+"r4",
+"r4",
+"r4",
+"r4"
+]
+},
+{
+"name": "addSphereEventSwitch",
+"args": [
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4"
+]
+},
+{
+"name": "setItemAppearancePointOption",
+"args": [
+"t4",
+"t4",
+"t4",
+"t4",
+"t4",
+"t4"
+]
+},
+{
+"name": "addCylinderEventSwitch",
+"args": [
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4",
+"r4"
+]
+}
+]
+}
+}

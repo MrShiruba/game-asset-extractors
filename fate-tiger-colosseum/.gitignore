@@ -1,0 +1,17 @@
+*.BND
+*.bnd
+*.iso
+*.cso
+*.BIN
+*.bin
+*.pac
+*.at3
+*.gmo
+*.gim
+*.gmp
+*.vag
+*.pmf
+extracted/
+script_text/
+__pycache__/
+script_asm/
